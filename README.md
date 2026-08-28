@@ -68,3 +68,14 @@ objectClass: top
 objectClass: organizationalUnit
 ou: Services
 ```
+
+3.1 Import structure to lDAP 
+```bash
+sudo ldapadd -x -D cn=admin,dc=ldap,dc=mydomain,dc=local -W -f base.ldif
+```
+
+3.2 Check the base group is imported
+```bash
+sudo ldapsearch -x -b "dc=ldap,dc=mydomain,dc=local" ou
+```
+
