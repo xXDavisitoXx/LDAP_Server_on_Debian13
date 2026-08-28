@@ -3,7 +3,7 @@
 1 install software
 ```bash
 apt update
-apt install slapd ldap-utils
+apt install slapd ldap-utils (sudo or sudo-ldap)
 ```
 
 1.1
@@ -84,5 +84,28 @@ sudo ldapadd -x -D cn=admin,dc=computer,dc=academy,dc=com -W -f base.ldif
 3.2 Check the base group is imported
 ```bash
 sudo ldapsearch -x -b "dc=computer,dc=academy,dc=com" ou
+```
+
+
+4.0 Import sudoers schema to LDAP
+El esquema sudo debe existir antes de importar cualquier LDIF que contenga objetos sudoRole, pero no depende de que hayas importado previamente base.ldif.
+
+4.1
+Download the Debian packet
+
+```bash
+mkdir sudo-schema
+cd sudo-schema
+apt download sudo-ldap
+```
+
+4.2 Extract the Debian packet
+```bash
+dpkg-deb -x sudo-ldap_*.deb extract
+```
+
+4.3 Import sudoers schema
+```bash
+ldapadd -Y EXTERNAL -H ldapi:/// -f extract/usr/share/doc/sudo-ldap/schema.olcSudo
 ```
 
