@@ -27,9 +27,10 @@ No delete old database
 Yes move old database
 
 2.7  Restart and check service slapd
+```bash
 sudo systemctl restart slapd
 sudo systemctl status slapd
-
+```
 2.8 Verify Domain name its correct
 sudo  slapcat
 
@@ -37,7 +38,7 @@ sudo  slapcat
 Create structure of LDAP
 
 nano base.ldif
-
+```bash
 # base.ldif
 
 dn: dc=computer,dc=acadenmy,dc=com
@@ -66,3 +67,4 @@ dn: ou=Services,dc=computer,dc=acadenmy,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Services
+```
