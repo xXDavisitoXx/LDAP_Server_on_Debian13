@@ -1,13 +1,18 @@
 # LDAP_Server_on_Debian13
 
-
 1 install software
+```bash
+apt update
 apt install slapd ldap-utils
+```
 
+1.1
 Create admin password 
 
-2
+2 Initialize LDAP wizard
+```
 sudo dpkg-reconfigure slapd
+```
 2.1
 Select NO omit LDAP config
 
@@ -36,9 +41,11 @@ sudo  slapcat
 
 3 
 Create structure of LDAP
-
-nano base.ldif
 ```bash
+nano base.ldif
+```
+
+```ldif
 # base.ldif
 
 dn: dc=computer,dc=acadenmy,dc=com
