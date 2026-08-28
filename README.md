@@ -108,4 +108,8 @@ dpkg-deb -x sudo-ldap_*.deb extract
 ```bash
 ldapadd -Y EXTERNAL -H ldapi:/// -f extract/usr/share/doc/sudo-ldap/schema.olcSudo
 ```
+:warning: if you dont find the schema in the extract you can search:
 
+```bash
+find extract -name "schema.olcSudo"
+```
