@@ -48,32 +48,82 @@ nano base.ldif
 ```ldif
 # base.ldif
 
-dn: dc=computer,dc=acadenmy,dc=com
+dn: dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: dcObject
 objectClass: organization
 dc: computer
-o: Computer Academy of xXDavisitoXx
+o: Ministry of Foreign Affairs and European Cooperation
 
-dn: ou=Usuarios,dc=computer,dc=acadenmy,dc=com
+dn: ou=Users,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Users
 
-dn: ou=Groups,dc=computer,dc=acadenmy,dc=com
+dn: ou=Active,ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Active
+
+dn: ou=Quarantine,ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Quarantine
+
+dn: ou=Groups,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Groups
 
-dn: ou=Roles,dc=computer,dc=acadenmy,dc=com
+dn: ou=System,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: System
+
+dn: ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Applications
+
+dn: ou=Netgroups,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Netgroups
+
+dn: ou=Machines,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Machines
+
+dn: ou=Servers,ou=Machines,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Servers
+
+dn: ou=Clients,ou=Machines,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Clients
+
+dn: ou=Roles,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Roles
 
-dn: ou=Services,dc=computer,dc=acadenmy,dc=com
+dn: ou=Sudoers,ou=Roles,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Sudoers
+
+dn: ou=Services,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Services
+
+dn: ou=Policies,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Policies
 ```
 
 3.1 Import structure to lDAP 
