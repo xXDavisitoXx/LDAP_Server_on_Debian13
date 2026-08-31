@@ -70,6 +70,11 @@ objectClass: top
 objectClass: organizationalUnit
 ou: Quarantine
 
+dn: ou=ServiceAccounts,ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: ServiceAccounts
+
 dn: ou=Groups,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
@@ -115,9 +120,15 @@ objectClass: top
 objectClass: organizationalUnit
 ou: Sudoers
 
-dn: ou=Services,dc=computer,dc=academy,dc=com
+dn: ou=Policies,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
+ou: Policies
+
+dn: ou=Certificates,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Certificates
 ```
 
 3.1 Import structure to lDAP 
