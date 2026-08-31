@@ -53,7 +53,7 @@ objectClass: top
 objectClass: dcObject
 objectClass: organization
 dc: computer
-o: Ministry of Foreign Affairs and European Cooperation
+o: Homelab
 
 dn: ou=Users,dc=computer,dc=academy,dc=com
 objectClass: top
@@ -124,6 +124,11 @@ dn: ou=Policies,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Policies
+
+dn: ou=Certificates,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Certificates
 ```
 
 3.1 Import structure to lDAP 
