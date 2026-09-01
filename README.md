@@ -42,34 +42,139 @@ sudo  slapcat
 3 
 Create structure of LDdc=computer,dc=academy,dc=com
 ```conf
-├── ou=Users
-│   ├── ou=Active
-│   ├── ou=Quarantine
-│   └── ou=Services
-│
-├── ou=Groups
-│   ├── ou=System
-│   ├── ou=Applications
-│   └── ou=NetworkGroups
-│
-├── ou=Machines
-│   ├── ou=Servers
-│   ├── ou=Clients
-│   └── ou=Disabled
-│
-├── ou=Roles
-│   └── ou=Sudoers
-│
-├── ou=Policies
-│
-├── ou=Certificates
-│   └── ou=Revoked
-│
-└── ou=Resources
-    ├── ou=Shared
-    ├── ou=Printers
-    ├── ou=Applications
-    └── ou=RoomsAP
+# base.ldif
+
+dn: dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+dc: computer
+o: Homelab
+
+dn: ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Users
+
+dn: ou=Active,ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Active
+
+dn: ou=Quarantine,ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Quarantine
+
+dn: ou=Services,ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Services
+
+dn: ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Groups
+
+dn: ou=System,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: System
+
+dn: ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Applications
+
+dn: ou=NetworkGroups,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: NetworkGroups
+
+dn: ou=Machines,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Machines
+
+dn: ou=Servers,ou=Machines,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Servers
+
+dn: ou=Clients,ou=Machines,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Clients
+
+dn: ou=Disabled,ou=Machines,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Disabled
+
+dn: ou=Roles,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Roles
+
+dn: ou=Sudoers,ou=Roles,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Sudoers
+
+dn: ou=LDAP,ou=Roles,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: LDAP
+
+dn: ou=SSH,ou=Roles,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: SSH
+
+dn: ou=Printing,ou=Roles,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Printing
+
+dn: ou=Policies,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Policies
+
+dn: ou=Certificates,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Certificates
+
+dn: ou=Revoked,ou=Certificates,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Revoked
+
+dn: ou=Resources,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Resources
+
+dn: ou=Shared,ou=Resources,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Shared
+
+dn: ou=Printers,ou=Resources,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Printers
+
+dn: ou=Applications,ou=Resources,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Applications
+
+dn: ou=Rooms,ou=Resources,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Rooms
 ```
 
 ```bash
