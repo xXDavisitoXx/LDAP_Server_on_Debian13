@@ -240,12 +240,11 @@ objectClass: organizationalUnit
 ou: Rooms
 ```
 
-
-
 3.1 Import structure to lDAP 
 ```bash
 sudo ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f base.ldif
 ```
+⚠️ If import fails because to the first DN block erase this.
 
 3.2 Check the base group is imported
 ```bash
