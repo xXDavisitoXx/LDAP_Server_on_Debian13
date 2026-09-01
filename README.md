@@ -279,3 +279,17 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f extract/usr/share/doc/sudo-ldap/schema.olcSu
 ```bash
 find extract -name "schema.olcSudo"
 ```
+
+5 LAM 
+
+5.1 install LAM
+
+```bash
+sudo apt install ldap-account-manager
+```
+
+5.2 Try web acces
+
+http://LDAP-IP/lam
+
+5.3 
