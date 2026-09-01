@@ -40,7 +40,37 @@ sudo systemctl status slapd
 sudo  slapcat
 
 3 
-Create structure of LDAP
+Create structure of LDdc=computer,dc=academy,dc=com
+
+├── ou=Users
+│   ├── ou=Active
+│   ├── ou=Quarantine
+│   └── ou=Services
+│
+├── ou=Groups
+│   ├── ou=System
+│   ├── ou=Applications
+│   └── ou=NetworkGroups
+│
+├── ou=Machines
+│   ├── ou=Servers
+│   ├── ou=Clients
+│   └── ou=Disabled
+│
+├── ou=Roles
+│   └── ou=Sudoers
+│
+├── ou=Policies
+│
+├── ou=Certificates
+│   └── ou=Revoked
+│
+└── ou=Resources
+    ├── ou=Shared
+    ├── ou=Printers
+    ├── ou=Applications
+    └── ou=RoomsAP
+
 ```bash
 nano base.ldif
 ```
@@ -70,10 +100,10 @@ objectClass: top
 objectClass: organizationalUnit
 ou: Quarantine
 
-dn: ou=ServiceAccounts,ou=Users,dc=computer,dc=academy,dc=com
+dn: ou=Services,ou=Users,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
-ou: ServiceAccounts
+ou: Services
 
 dn: ou=Groups,dc=computer,dc=academy,dc=com
 objectClass: top
@@ -90,10 +120,10 @@ objectClass: top
 objectClass: organizationalUnit
 ou: Applications
 
-dn: ou=Netgroups,dc=computer,dc=academy,dc=com
+dn: ou=NetworkGroups,ou=Groups,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
-ou: Netgroups
+ou: NetworkGroups
 
 dn: ou=Machines,dc=computer,dc=academy,dc=com
 objectClass: top
@@ -109,6 +139,11 @@ dn: ou=Clients,ou=Machines,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Clients
+
+dn: ou=Disabled,ou=Machines,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Disabled
 
 dn: ou=Roles,dc=computer,dc=academy,dc=com
 objectClass: top
@@ -129,6 +164,36 @@ dn: ou=Certificates,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Certificates
+
+dn: ou=Revoked,ou=Certificates,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Revoked
+
+dn: ou=Resources,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Resources
+
+dn: ou=Shared,ou=Resources,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Shared
+
+dn: ou=Printers,ou=Resources,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Printers
+
+dn: ou=Applications,ou=Resources,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Applications
+
+dn: ou=Rooms,ou=Resources,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Rooms
 ```
 
 3.1 Import structure to lDAP 
