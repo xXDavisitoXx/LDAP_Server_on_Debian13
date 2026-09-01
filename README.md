@@ -43,6 +43,8 @@ sudo  slapcat
 Create structure of LDdc=computer,dc=academy,dc=com
 
 ```conf
+dc=computer,dc=academy,dc=com
+
 ├── ou=Users
 │   ├── ou=Active
 │   ├── ou=Quarantine
@@ -62,11 +64,15 @@ Create structure of LDdc=computer,dc=academy,dc=com
 │   ├── ou=Sudoers
 │   ├── ou=LDAP
 │   ├── ou=SSH
-│   └── ou=Printing
+│   └── ou=Print
 │
 ├── ou=Policies
 │
 ├── ou=Certificates
+│   ├── ou=CertificateAuthorities
+│   ├── ou=Users
+│   ├── ou=Machines
+│   ├── ou=Services
 │   └── ou=Revoked
 │
 └── ou=Resources
@@ -81,8 +87,6 @@ nano base.ldif
 ```
 
 ```conf
-# base.ldif
-
 dn: dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: dcObject
@@ -170,10 +174,10 @@ objectClass: top
 objectClass: organizationalUnit
 ou: SSH
 
-dn: ou=Printing,ou=Roles,dc=computer,dc=academy,dc=com
+dn: ou=Print,ou=Roles,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
-ou: Printing
+ou: Print
 
 dn: ou=Policies,dc=computer,dc=academy,dc=com
 objectClass: top
@@ -184,6 +188,26 @@ dn: ou=Certificates,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Certificates
+
+dn: ou=CertificateAuthorities,ou=Certificates,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: CertificateAuthorities
+
+dn: ou=Users,ou=Certificates,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Users
+
+dn: ou=Machines,ou=Certificates,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Machines
+
+dn: ou=Services,ou=Certificates,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Services
 
 dn: ou=Revoked,ou=Certificates,dc=computer,dc=academy,dc=com
 objectClass: top
