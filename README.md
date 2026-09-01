@@ -325,3 +325,16 @@ pass: lam
 On the Tool settings, input the domain name of your OpenLDAP server.
 On the Security settings, select the login method as Fixed list and input the details admin user for the OpenLDAP server.
 On the Profile password, input the new password and repeat.
+
+⚠️ We recommnded change login method in server preferences to LDAP search
+
+5.9 Edit users and groups directory
+
+Next, click on the Account Types section the configure the following section:
+
+On the Users section, input the default base domain for OpenLDAP users. In his case, the default suffix is People.
+On the Groups section, input the default base domain for the group. In this case, the default other group is Groups.
+Click Save to apply the changes.
+
+
+
