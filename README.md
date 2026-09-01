@@ -311,6 +311,17 @@ Require ip 127.0.0.1 192.168.10.0/24
 sudo systemctl restart apache2
 ```
 
-5 Try web acces
+5.5 Try web acces
 http://LDAP-IP/lam
 
+5.6 Click the menu LAM configuration on the top right.
+
+5.7 Click Edit server profiles to modify the OpenLDAP profile.
+User: lam
+pass: lam
+
+5.8 Change settings and LAM user password
+
+On the Tool settings, input the domain name of your OpenLDAP server.
+On the Security settings, select the login method as Fixed list and input the details admin user for the OpenLDAP server.
+On the Profile password, input the new password and repeat.
