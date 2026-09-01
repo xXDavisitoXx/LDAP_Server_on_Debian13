@@ -41,7 +41,7 @@ sudo  slapcat
 
 3 
 Create structure of LDdc=computer,dc=academy,dc=com
-
+```conf
 ├── ou=Users
 │   ├── ou=Active
 │   ├── ou=Quarantine
@@ -70,6 +70,7 @@ Create structure of LDdc=computer,dc=academy,dc=com
     ├── ou=Printers
     ├── ou=Applications
     └── ou=RoomsAP
+```
 
 ```bash
 nano base.ldif
