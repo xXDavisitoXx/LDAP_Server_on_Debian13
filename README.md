@@ -288,8 +288,6 @@ find extract -name "schema.olcSudo"
 sudo apt install ldap-account-manager
 ```
 
-http://LDAP-IP/lam
-
 5.2 Update PHP memory limit to 256M
 ```bash
  nano /etc/php/8.4/apache2/php.ini
@@ -298,6 +296,7 @@ http://LDAP-IP/lam
 memory_limit = 256M
 ```
 5.3 Securize IP range to connect 
+
 ```bash
  nano /etc/apache2/conf-enabled/ldap-account-manager.conf
 ```
@@ -306,5 +305,12 @@ memory_limit = 256M
 #Require all granted
 Require ip 127.0.0.1 192.168.10.0/24
 ```
+5.4 Restart service Apache2
+
+```conf
+sudo systemctl restart apache2
+```
 
 5 Try web acces
+http://LDAP-IP/lam
+
