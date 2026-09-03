@@ -244,19 +244,17 @@ ou: Rooms
 ```bash
 sudo ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f base.ldif
 ```
-
 ⚠️ If import fails because to the first DN block erase this.
 
-3.2 Check the base group is imported
+Check the base group is imported
 ```bash
 sudo ldapsearch -x -b "dc=computer,dc=academy,dc=com" ou
 ```
 
-
-4.0 Import sudoers schema to LDAP
+3.2 Import sudoers or other schemas to LDAP
 El esquema sudo debe existir antes de importar cualquier LDIF que contenga objetos sudoRole, pero no depende de que hayas importado previamente base.ldif.
 
-4.1
+3.2.1
 Download the Debian packet
 
 ```bash
@@ -265,12 +263,12 @@ cd sudo-schema
 apt download sudo-ldap
 ```
 
-4.2 Extract the Debian packet
+3.2.2 Extract the Debian packet
 ```bash
 dpkg-deb -x sudo-ldap_*.deb extract
 ```
 
-4.3 Import sudoers schema
+3.2.3 Import sudoers schema
 ```bash
 ldapadd -Y EXTERNAL -H ldapi:/// -f extract/usr/share/doc/sudo-ldap/schema.olcSudo
 ```
@@ -279,6 +277,59 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f extract/usr/share/doc/sudo-ldap/schema.olcSu
 ```bash
 find extract -name "schema.olcSudo"
 ```
+
+3.3 Create Roles
+
+
+```conf
+# Roles.ldif
+
+dn: cn=%Administrators-Linux,ou=Sudoers,ou=Roles,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: sudoRole
+cn: %Administrators-Linux
+sudoUser: %Administrators-Linux
+sudoHost: ALL
+sudoCommand: ALL
+
+dn: cn=%Administrators-LDAP,ou=Sudoers,ou=Roles,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: sudoRole
+cn: %Administrators-LDAP
+sudoUser: %Administrators-LDAP
+sudoHost: ALL
+sudoCommand: /usr/bin/ldapadd
+sudoCommand: /usr/bin/ldapmodify
+sudoCommand: /usr/bin/ldapdelete
+sudoCommand: /usr/bin/ldapsearch
+sudoCommand: /usr/bin/ldappasswd
+sudoCommand: /usr/sbin/slapadd
+sudoCommand: /usr/sbin/slapcat
+sudoCommand: /usr/sbin/slapmodify
+sudoCommand: /usr/sbin/slappasswd
+sudoCommand: /bin/systemctl start slapd
+sudoCommand: /bin/systemctl stop slapd
+sudoCommand: /bin/systemctl restart slapd
+sudoCommand: /bin/systemctl status slapd
+```
+
+3.4 Import Roles
+```bash
+ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Roles.ldif
+```
+
+
+3.5 Create Groups
+```conf
+
+
+
+3.6 Import Groups
+```bash
+ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Groups.ldif
+```
+
+
 
 5 LAM 
 
