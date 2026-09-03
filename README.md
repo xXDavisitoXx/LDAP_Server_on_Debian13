@@ -314,17 +314,41 @@ sudoCommand: /bin/systemctl status slapd
 ```
 
 3.4 Import Roles
+
 ```bash
 ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Roles.ldif
 ```
 
 
 3.5 Create Groups
+
 ```conf
+dn: cn=Administrators-LDAP,ou=Grupos,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: posixGroup
+cn: Administrators-LDAP
+gidNumber: 2001
 
+dn: cn=Administrators-Linux,ou=Grupos,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: posixGroup
+cn: Administrators-Linux
+gidNumber: 2002
 
+dn: cn=SSH,ou=Grupos,dc=correodip,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: posixGroup
+cn: SSH
+gidNumber: 2003
 
+dn: cn=Wiki,ou=Grupos,dc=correodip,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: posixGroup
+cn: Wiki
+gidNumber: 2004
+```
 3.6 Import Groups
+
 ```bash
 ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Groups.ldif
 ```
