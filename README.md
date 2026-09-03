@@ -40,7 +40,7 @@ sudo systemctl status slapd
 sudo  slapcat
 
 3 
-Create structure of LDdc=computer,dc=academy,dc=com
+Create structure of LDAP dc=computer,dc=academy,dc=com (Example)
 
 ```conf
 dc=computer,dc=academy,dc=com
