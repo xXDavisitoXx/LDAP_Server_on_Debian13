@@ -353,7 +353,49 @@ gidNumber: 2004
 ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Groups.ldif
 ```
 
+3.7 Create Users
 
+Users.ldif
+
+```conf
+dn: uid=User-Example-1,ou=Active,ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: User-Example-1
+cn: User-Example-1
+sn: User-Example-1
+givenName: User-Example-1
+uidNumber: 1001
+gidNumber: 1001
+homeDirectory: /home/User-Example-1
+loginShell: /bin/bash
+userPassword: {SSHA}VW5Vc3VhcmlvUGVyc29uYWwxU1NIQUhhc2g=
+shadowLastChange: 0
+
+dn: uid=User-Service-1,ou=Services,ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: posixAccount
+uid: User-Service-1
+cn: User-Service-1
+sn: User-Service-1
+userPassword: {SSHA}QWx1bW5vMUtLUG9kQXNTRUhhc2hGaWN0aWNpbw==
+uidNumber: 1002
+gidNumber: 1002
+homeDirectory: /nonexistent
+loginShell: /sbin/nologin
+```
+3.8 Import Users 
+
+```bash
+ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Users.ldif
+```
 
 5 LAM 
 
