@@ -397,22 +397,22 @@ loginShell: /sbin/nologin
 ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Users.ldif
 ```
 
-5 LAM 
+4 install LAM 
 
-5.1 install LAM
+4.1 Download Packet
 
 ```bash
 sudo apt install ldap-account-manager
 ```
 
-5.2 Update PHP memory limit to 256M
+4.2 Update PHP memory limit to 256M
 ```bash
  nano /etc/php/8.4/apache2/php.ini
 ```
 ```bash
 memory_limit = 256M
 ```
-5.3 Securize IP range to connect 
+4.3 Securize IP range to connect 
 
 ```bash
  nano /etc/apache2/conf-enabled/ldap-account-manager.conf
@@ -422,22 +422,22 @@ memory_limit = 256M
 #Require all granted
 Require ip 127.0.0.1 192.168.10.0/24
 ```
-5.4 Restart service Apache2
+4.4 Restart service Apache2
 
 ```conf
 sudo systemctl restart apache2
 ```
 
-5.5 Try web acces
+4.5 Try web acces
 http://LDAP-IP/lam
 
-5.6 Click the menu LAM configuration on the top right.
+4.6 Click the menu LAM configuration on the top right.
 
-5.7 Click Edit server profiles to modify the OpenLDAP profile.
+4.7 Click Edit server profiles to modify the OpenLDAP profile.
 User: lam
 pass: lam
 
-5.8 Change settings and LAM user password
+4.8 Change settings and LAM user password
 
 On the Tool settings, input the domain name of your OpenLDAP server.
 On the Security settings, select the login method as Fixed list and input the details admin user for the OpenLDAP server.
@@ -445,7 +445,7 @@ On the Profile password, input the new password and repeat.
 
 ⚠️ We recommnded change login method in server preferences to LDAP search
 
-5.9 Edit users and groups directory
+4.9 Edit users and groups directory
 
 Next, click on the Account Types section the configure the following section:
 
@@ -453,5 +453,6 @@ On the Users section, input the default base domain for OpenLDAP users. In his c
 On the Groups section, input the default base domain for the group. In this case, the default other group is Groups.
 Click Save to apply the changes.
 
+5 Configure LAM 
 
 
