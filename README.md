@@ -47,7 +47,7 @@ dc=computer,dc=academy,dc=com
 
 ├── ou=Users
 │   ├── ou=Active
-│   ├── ou=Quarantine
+│   ├── ou=Inactive
 │   └── ou=Services
 │
 ├── ou=Groups
@@ -104,10 +104,10 @@ objectClass: top
 objectClass: organizationalUnit
 ou: Active
 
-dn: ou=Quarantine,ou=Users,dc=computer,dc=academy,dc=com
+dn: ou=Inactive,ou=Users,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
-ou: Quarantine
+ou: Inactive
 
 dn: ou=Services,ou=Users,dc=computer,dc=academy,dc=com
 objectClass: top
