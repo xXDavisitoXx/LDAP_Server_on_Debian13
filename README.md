@@ -13,23 +13,17 @@ Create admin password
 ```
 sudo dpkg-reconfigure slapd
 ```
-### 2.1
-Select NO omit LDAP config
+### 2.1 Select NO omit LDAP config
 
-### 2.2
-Check the Domain name
+### 2.2 Check the Domain name
 
-### 2.3
-Check the organization  name
+### 2.3 Check the organization  name
 
-### 2.4 
-Enter and repeat the admin password 
+### 2.4 Enter and repeat the admin password 
 
-### 2.5 
-No delete old database 
+### 2.5 No delete old database 
 
-### 2.6 
-Yes move old database
+### 2.6 Yes move old database
 
 ### 2.7  Restart and check service slapd
 ```bash
@@ -240,7 +234,7 @@ objectClass: organizationalUnit
 ou: Rooms
 ```
 
-3.1 Import structure to lDAP 
+### 3.1 Import structure to lDAP 
 ```bash
 sudo ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f base.ldif
 ```
@@ -251,10 +245,10 @@ Check the base group is imported
 sudo ldapsearch -x -b "dc=computer,dc=academy,dc=com" ou
 ```
 
-3.2 Import sudoers or other schemas to LDAP
+### 3.2 Import sudoers or other schemas to LDAP
 El esquema sudo debe existir antes de importar cualquier LDIF que contenga objetos sudoRole, pero no depende de que hayas importado previamente base.ldif.
 
-3.2.1
+### 3.2.1
 Download the Debian packet
 
 ```bash
@@ -263,12 +257,12 @@ cd sudo-schema
 apt download sudo-ldap
 ```
 
-3.2.2 Extract the Debian packet
+### 3.2.2 Extract the Debian packet
 ```bash
 dpkg-deb -x sudo-ldap_*.deb extract
 ```
 
-3.2.3 Import sudoers schema
+### 3.2.3 Import sudoers schema
 ```bash
 ldapadd -Y EXTERNAL -H ldapi:/// -f extract/usr/share/doc/sudo-ldap/schema.olcSudo
 ```
@@ -278,8 +272,7 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f extract/usr/share/doc/sudo-ldap/schema.olcSu
 find extract -name "schema.olcSudo"
 ```
 
-3.3 Create Roles
-
+### 3.3 Create Roles
 
 ```conf
 # Roles.ldif
@@ -313,14 +306,14 @@ sudoCommand: /bin/systemctl restart slapd
 sudoCommand: /bin/systemctl status slapd
 ```
 
-3.4 Import Roles
+### 3.4 Import Roles
 
 ```bash
 ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Roles.ldif
 ```
 
 
-3.5 Create Groups
+### 3.5 Create Groups
 
 ```conf
 dn: cn=Administrators-LDAP,ou=Grupos,dc=computer,dc=academy,dc=com
@@ -347,13 +340,13 @@ objectClass: posixGroup
 cn: Wiki
 gidNumber: 2004
 ```
-3.6 Import Groups
+### 3.6 Import Groups
 
 ```bash
 ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Groups.ldif
 ```
 
-3.7 Create Users
+### 3.7 Create Users
 
 Users.ldif
 
@@ -391,28 +384,28 @@ gidNumber: 1002
 homeDirectory: /nonexistent
 loginShell: /sbin/nologin
 ```
-3.8 Import Users 
+### 3.8 Import Users 
 
 ```bash
 ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Users.ldif
 ```
 
-4 install LAM 
+## 4 install LAM 
 
-4.1 Download Packet
+### 4.1 Download Packet
 
 ```bash
 sudo apt install ldap-account-manager
 ```
 
-4.2 Update PHP memory limit to 256M
+### 4.2 Update PHP memory limit to 256M
 ```bash
  nano /etc/php/8.4/apache2/php.ini
 ```
 ```bash
 memory_limit = 256M
 ```
-4.3 Securize IP range to connect 
+### 4.3 Securize IP range to connect 
 
 ```bash
  nano /etc/apache2/conf-enabled/ldap-account-manager.conf
@@ -422,22 +415,22 @@ memory_limit = 256M
 #Require all granted
 Require ip 127.0.0.1 192.168.10.0/24
 ```
-4.4 Restart service Apache2
+### 4.4 Restart service Apache2
 
 ```conf
 sudo systemctl restart apache2
 ```
 
-4.5 Try web acces
+### 4.5 Try web acces
 http://LDAP-IP/lam
 
-4.6 Click the menu LAM configuration on the top right.
+### 4.6 Click the menu LAM configuration on the top right.
 
-4.7 Click Edit server profiles to modify the OpenLDAP profile.
+### 4.7 Click Edit server profiles to modify the OpenLDAP profile.
 User: lam
 pass: lam
 
-4.8 Change settings and LAM user password
+### 4.8 Change settings and LAM user password
 
 On the Tool settings, input the domain name of your OpenLDAP server.
 On the Security settings, select the login method as Fixed list and input the details admin user for the OpenLDAP server.
@@ -445,7 +438,7 @@ On the Profile password, input the new password and repeat.
 
 ⚠️ We recommnded change login method in server preferences to LDAP search
 
-4.9 Edit users and groups directory
+### 4.9 Edit users and groups directory
 
 Next, click on the Account Types section the configure the following section:
 
@@ -453,6 +446,6 @@ On the Users section, input the default base domain for OpenLDAP users. In his c
 On the Groups section, input the default base domain for the group. In this case, the default other group is Groups.
 Click Save to apply the changes.
 
-5 Configure LAM 
+## 5 Configure LAM 
 
 
