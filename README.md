@@ -1,45 +1,45 @@
 # LDAP_Server_on_Debian13
 
-1 install software
+## 1 install software
 ```bash
 apt update
 apt install slapd ldap-utils sudo
 ```
 
-1.1
+### 1.1
 Create admin password 
 
-2 Initialize LDAP wizard
+## 2 Initialize LDAP wizard
 ```
 sudo dpkg-reconfigure slapd
 ```
-2.1
+### 2.1
 Select NO omit LDAP config
 
-2.2
+### 2.2
 Check the Domain name
 
-2.3
+### 2.3
 Check the organization  name
 
-2.4 
+### 2.4 
 Enter and repeat the admin password 
 
-2.5 
+### 2.5 
 No delete old database 
 
-2.6 
+### 2.6 
 Yes move old database
 
-2.7  Restart and check service slapd
+### 2.7  Restart and check service slapd
 ```bash
 sudo systemctl restart slapd
 sudo systemctl status slapd
 ```
-2.8 Verify Domain name its correct
+###  2.8 Verify Domain name its correct
 sudo  slapcat
 
-3 
+## 3 
 Create structure of LDAP dc=computer,dc=academy,dc=com (Example)
 
 ```conf
@@ -81,7 +81,7 @@ dc=computer,dc=academy,dc=com
     ├── ou=Applications
     └── ou=Rooms
 ```
-
+### 3.1 Create a new structure file base.ldif
 ```bash
 nano base.ldif
 ```
