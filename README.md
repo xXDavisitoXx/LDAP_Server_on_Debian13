@@ -36,7 +36,6 @@ sudo  slapcat
 
 ```conf
 dc=computer,dc=academy,dc=com
-
 ├── ou=Users
 │   ├── ou=Active
 │   ├── ou=Inactive
@@ -55,8 +54,7 @@ dc=computer,dc=academy,dc=com
 ├── ou=Roles
 │   ├── ou=Sudoers
 │   ├── ou=LDAP
-│   ├── ou=SSH
-│   └── ou=Print
+│   └── ou=Printing
 │
 ├── ou=Policies
 │
@@ -73,6 +71,7 @@ dc=computer,dc=academy,dc=com
     ├── ou=Applications
     └── ou=Rooms
 ```
+
 ### 3.1 Create a new structure file base.ldif
 ```bash
 nano base.ldif
