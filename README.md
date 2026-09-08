@@ -1,5 +1,9 @@
 # OpenLDAP Server on Debian13
 
+<p align="center">
+  <img src="Images/Cover/Cover_OPENLDAP.png" alt="Zabbix7-Cover" width="100%">
+</p>Co
+
 ## 1 install software
 ```bash
 apt update
