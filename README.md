@@ -78,12 +78,14 @@ nano base.ldif
 ```
 
 ```conf
+# base.ldif
+
 dn: dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: dcObject
 objectClass: organization
 dc: computer
-o: Homelab
+o: Computer Academy
 
 dn: ou=Users,dc=computer,dc=academy,dc=com
 objectClass: top
@@ -160,15 +162,10 @@ objectClass: top
 objectClass: organizationalUnit
 ou: LDAP
 
-dn: ou=SSH,ou=Roles,dc=computer,dc=academy,dc=com
+dn: ou=Printing,ou=Roles,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
-ou: SSH
-
-dn: ou=Print,ou=Roles,dc=computer,dc=academy,dc=com
-objectClass: top
-objectClass: organizationalUnit
-ou: Print
+ou: Printing
 
 dn: ou=Policies,dc=computer,dc=academy,dc=com
 objectClass: top
