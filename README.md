@@ -270,33 +270,27 @@ find extract -name "schema.olcSudo"
 ```conf
 # Roles.ldif
 
-dn: cn=%Administrators-Linux,ou=Sudoers,ou=Roles,dc=computer,dc=academy,dc=com
+dn: cn=Role-Linux-Admin,ou=Sudoers,ou=Roles,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: sudoRole
-cn: %Administrators-Linux
-sudoUser: %Administrators-Linux
+cn: Role-Linux-Admin
+sudoUser: %Linux-Administrators
 sudoHost: ALL
 sudoCommand: ALL
 
-dn: cn=%Administrators-LDAP,ou=Sudoers,ou=Roles,dc=computer,dc=academy,dc=com
+dn: cn=Role-LDAP-Admin,ou=LDAP,ou=Roles,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: sudoRole
-cn: %Administrators-LDAP
-sudoUser: %Administrators-LDAP
+cn: Role-LDAP-Admin
+sudoUser: cn=LDAP-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
 sudoHost: ALL
-sudoCommand: /usr/bin/ldapadd
-sudoCommand: /usr/bin/ldapmodify
-sudoCommand: /usr/bin/ldapdelete
-sudoCommand: /usr/bin/ldapsearch
-sudoCommand: /usr/bin/ldappasswd
-sudoCommand: /usr/sbin/slapadd
-sudoCommand: /usr/sbin/slapcat
-sudoCommand: /usr/sbin/slapmodify
-sudoCommand: /usr/sbin/slappasswd
-sudoCommand: /bin/systemctl start slapd
-sudoCommand: /bin/systemctl stop slapd
-sudoCommand: /bin/systemctl restart slapd
-sudoCommand: /bin/systemctl status slapd
+sudoCommand: /usr/bin/ldap*
+sudoCommand: /usr/sbin/slap*
+sudoCommand: /bin/systemctl *slapd*
+sudoCommand: /usr/bin/journalctl *slapd*
+sudoCommand: /usr/bin/sudoedit /etc/ldap/*
+sudoCommand: /usr/bin/sudoedit /etc/default/slapd/*
+sudoCommand: /usr/bin/sudoedit /etc/systemd/system/slapd*
 ```
 
 ### 3.4 Import Roles
