@@ -346,9 +346,25 @@ description: Group for user accounts that can access the Wiki
 ```bash
 ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Groups.ldif
 ```
+### 3.7 Create ACL to LAM-ADMIN group
+```conf
+# ACL.ldif
 
-### 3.7 Create Users
+dn: olcDatabase={1}mdb,cn=config
+changetype: modify
+add: olcAccess
+olcAccess: {0}to dn.subtree="dc=computer,dc=academy,dc=com"
+    by group.exact="cn=LAM-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com" write
+    by self write
+    by users read
+```
 
+Import ACL 
+```bash
+sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f ACL.ldif
+```
+
+### 3.8 Create Users
 ```conf
 # Users.ldif
 
