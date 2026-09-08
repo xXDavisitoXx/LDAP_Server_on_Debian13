@@ -248,8 +248,7 @@ sudo ldapsearch -x -b "dc=computer,dc=academy,dc=com" ou
 ### 3.2 Import sudoers or other schemas to LDAP
 El esquema sudo debe existir antes de importar cualquier LDIF que contenga objetos sudoRole, pero no depende de que hayas importado previamente base.ldif.
 
-### 3.2.1
-Download the Debian packet
+### 3.2.1 Download the Debian packet
 
 ```bash
 mkdir sudo-schema
