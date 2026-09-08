@@ -349,41 +349,73 @@ ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Groups.ldif
 
 ### 3.7 Create Users
 
-Users.ldif
-
 ```conf
-dn: uid=User-Example-1,ou=Active,ou=Users,dc=computer,dc=academy,dc=com
+# Users.ldif
+
+dn: uid=lam-service,ou=Services,ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+uid: lam-service
+cn: LAM Service Account
+sn: Service
+userPassword: {SSHA}K9sL4Ny7jVwq8Bt2cWmYF7RzP1XeHkQa
+description: Service account used by LAM to administer LDAP
+
+dn: uid=user1,ou=Active,ou=Users,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
-uid: User-Example-1
-cn: User-Example-1
-sn: User-Example-1
-givenName: User-Example-1
-uidNumber: 1001
-gidNumber: 1001
-homeDirectory: /home/User-Example-1
+uid: user1
+cn: John Smith
+sn: Smith
+givenName: John
+uidNumber: 1002
+gidNumber: 1002
+homeDirectory: /home/john
 loginShell: /bin/bash
-userPassword: {SSHA}VW5Vc3VhcmlvUGVyc29uYWwxU1NIQUhhc2g=
+userPassword: {SSHA}N4mY8uLpQ2vKj7XtBwR5cHd9ZaEsTgF1
 shadowLastChange: 0
 
-dn: uid=User-Service-1,ou=Services,ou=Users,dc=computer,dc=academy,dc=com
+dn: uid=user2,ou=Active,ou=Users,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
 objectClass: inetOrgPerson
 objectClass: posixAccount
-uid: User-Service-1
-cn: User-Service-1
-sn: User-Service-1
-userPassword: {SSHA}QWx1bW5vMUtLUG9kQXNTRUhhc2hGaWN0aWNpbw==
-uidNumber: 1002
-gidNumber: 1002
+objectClass: shadowAccount
+uid: user2
+cn: Alice Smith
+sn: Smith
+givenName: Alice
+uidNumber: 1004
+gidNumber: 1004
+homeDirectory: /home/asmith
+loginShell: /bin/bash
+userPassword: {SSHA}T8pVn3LqH5yKc9RxMwEaZ7BdFuGsJ2Nt
+shadowLastChange: 0
+
+dn: uid=zabbix-service,ou=Services,ou=Users,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: posixAccount
+uid: zabbix-service
+cn: Zabbix Service Account
+sn: Service
+givenName: Zabbix
+uidNumber: 1003
+gidNumber: 1003
 homeDirectory: /nonexistent
 loginShell: /sbin/nologin
+userPassword: {SSHA}R7xTc2PnLmQ4VbY9KwEjF5ZdNsAuHcG3
+
+
 ```
 ### 3.8 Import Users 
 
