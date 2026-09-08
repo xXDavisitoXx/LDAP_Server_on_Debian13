@@ -1,7 +1,7 @@
 # OpenLDAP Server on Debian13
 
 <p align="center">
-  <img src="Images/Cover/Cover_OpenLDAP.png" alt="OpenLDAP-Cover" width="100%">
+  <img src="Images/Cover/Cover_OpenLDAP.jpg" alt="OpenLDAP-Cover" width="100%">
 </p>Co
 
 ## 1 install software
