@@ -359,12 +359,12 @@ olcAccess: {0}to dn.subtree="dc=computer,dc=academy,dc=com"
     by users read
 ```
 
-Import ACL 
+### 3.8 Import ACL 
 ```bash
 sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f ACL.ldif
 ```
 
-### 3.8 Create Users
+### 3.9 Create Users
 ```conf
 # Users.ldif
 
@@ -433,7 +433,7 @@ userPassword: {SSHA}R7xTc2PnLmQ4VbY9KwEjF5ZdNsAuHcG3
 
 
 ```
-### 3.8 Import Users 
+### 3.10 Import Users 
 
 ```bash
 ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Users.ldif
