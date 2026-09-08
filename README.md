@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="Images/Cover/Cover_OpenLDAP.jpg" alt="OpenLDAP-Cover" width="100%">
-</p>Co
+</p>
 
 ## 1 install software
 ```bash
