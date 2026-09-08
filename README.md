@@ -303,29 +303,43 @@ ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Roles.ldif
 ### 3.5 Create Groups
 
 ```conf
-dn: cn=Administrators-LDAP,ou=Grupos,dc=computer,dc=academy,dc=com
+# Groups.ldif
+
+dn: cn=LDAP-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: groupOfNames
+cn: LDAP-Administrators
+member: uid=user1,ou=Active,ou=Users,dc=computer,dc=academy,dc=com
+description: Group for user accounts that administer LDAP
+
+dn: cn=LAM-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: groupOfNames
+cn: LAM-Administrators
+member: uid=lam-service,ou=Services,ou=Users,dc=computer,dc=academy,dc=com
+member: uid=user1,ou=Active,ou=Users,dc=computer,dc=academy,dc=com
+description: Group for the LAM service account with administrative permissions over LDAP
+
+dn: cn=Linux-Administrators,ou=System,ou=Groups,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: posixGroup
-cn: Administrators-LDAP
+cn: Linux-Administrators
 gidNumber: 2001
+description: Group for user accounts that administer Linux systems
 
-dn: cn=Administrators-Linux,ou=Grupos,dc=computer,dc=academy,dc=com
+dn: cn=SSH-Access,ou=System,ou=Groups,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: posixGroup
-cn: Administrators-Linux
+cn: SSH-Access
 gidNumber: 2002
+description: POSIX group used to restrict remote SSH access to authorized users
 
-dn: cn=SSH,ou=Grupos,dc=correodip,dc=computer,dc=academy,dc=com
+dn: cn=Wiki-Users,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: posixGroup
-cn: SSH
+cn: Wiki-Users
 gidNumber: 2003
-
-dn: cn=Wiki,ou=Grupos,dc=correodip,dc=computer,dc=academy,dc=com
-objectClass: top
-objectClass: posixGroup
-cn: Wiki
-gidNumber: 2004
+description: Group for user accounts that can access the Wiki
 ```
 ### 3.6 Import Groups
 
