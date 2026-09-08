@@ -32,8 +32,7 @@ sudo systemctl status slapd
 ###  2.8 Verify Domain name its correct
 sudo  slapcat
 
-## 3 
-Create structure of LDAP dc=computer,dc=academy,dc=com (Example)
+## 3 Create structure of LDAP dc=computer,dc=academy,dc=com (Example)
 
 ```conf
 dc=computer,dc=academy,dc=com
