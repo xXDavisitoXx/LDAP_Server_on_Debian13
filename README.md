@@ -1,4 +1,4 @@
-# LDAP Server on Debian13
+# OpenLDAP Server on Debian13
 
 ## 1 install software
 ```bash
