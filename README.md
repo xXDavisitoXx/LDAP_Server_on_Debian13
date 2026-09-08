@@ -6,8 +6,7 @@ apt update
 apt install slapd ldap-utils sudo
 ```
 
-### 1.1
-Create admin password 
+### 1.1 Create admin password 
 
 ## 2 Initialize LDAP wizard
 ```
