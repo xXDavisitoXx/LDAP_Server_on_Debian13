@@ -3,7 +3,7 @@
 1 install software
 ```bash
 apt update
-apt install slapd ldap-utils (sudo or sudo-ldap)
+apt install slapd ldap-utils sudo
 ```
 
 1.1
