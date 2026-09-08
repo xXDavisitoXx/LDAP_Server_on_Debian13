@@ -1,4 +1,4 @@
-# LDAP_Server_on_Debian13
+# LDAP Server on Debian13
 
 ## 1 install software
 ```bash
