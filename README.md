@@ -501,10 +501,8 @@ labeled "Profile Password" and enter the new password twice.
 ⚠️ To give it a more corporate and professional setup, we will configure LAM to use a user from our LDAP tree,
 allowing it to be managed in the same way as the service accounts we will be using.
 
-In the "General Settings" tab, within the "Server Settings" section, we will edit the "LDAP suffix", "Bind user", and "Bind password" fields.
-
-
-
+In the "General Settings" tab, within the "Server Settings" section,
+we will edit the "Login method," "LDAP suffix," "Bind user," and "Bind password" fields.
 
 
 
