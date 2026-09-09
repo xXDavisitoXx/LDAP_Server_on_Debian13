@@ -365,7 +365,10 @@ ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Groups.ldif
 ```conf
 # ACL.ldif
 
-olcAccess: to dn.subtree="dc=computer,dc=academy,dc=co"
+dn: olcDatabase={1}mdb,cn=config
+changetype: modify
+add: olcAccess
+olcAccess: to dn.subtree="dc=computer,dc=academy,dc=com"
   by group.exact="cn=LAM-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com" write
   by self write
   by users read
