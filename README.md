@@ -488,13 +488,25 @@ sudo systemctl restart apache2
 ### 4.5 Try web acces
 http://LDAP-IP/lam
 
-### 4.6 Click the menu LAM configuration on the top right.
+### 4.6 Click the menu "LAM configuration" on the top right.
 
-### 4.7 Click Edit server profiles to modify the OpenLDAP profile.
-User: lam
-pass: lam
+### 4.7 Click "Edit server profiles" to modify the OpenLDAP profile.
+* User: lam
+* pass: lam
 
-### 4.8 Change settings and LAM user password
+### 4.8 Change default password LAM 
+On the first tab, "General Settings," scroll all the way down to the section
+labeled "Profile Password" and enter the new password twice.
+
+⚠️ To give it a more corporate and professional setup, we will configure LAM to use a user from our LDAP tree,
+allowing it to be managed in the same way as the service accounts we will be using.
+
+In the "General Settings" tab, within the "Server Settings" section, we will edit the "LDAP suffix", "Bind user", and "Bind password" fields.
+
+
+
+
+
 
 On the Tool settings, input the domain name of your OpenLDAP server.
 On the Security settings, select the login method as Fixed list and input the details admin user for the OpenLDAP server.
