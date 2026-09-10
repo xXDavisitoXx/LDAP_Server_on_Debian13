@@ -75,7 +75,7 @@ dc=computer,dc=academy,dc=com
 │
 ├── ou=Certificates
 │   ├── ou=CertificateAuthorities
-│   ├── ou=Users
+│   ├── ou=Personal
 │   ├── ou=Machines
 │   ├── ou=Services
 │   └── ou=Revoked
@@ -197,7 +197,7 @@ objectClass: top
 objectClass: organizationalUnit
 ou: CertificateAuthorities
 
-dn: ou=Users,ou=Certificates,dc=computer,dc=academy,dc=com
+dn: ou=Personal,ou=Certificates,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Users
