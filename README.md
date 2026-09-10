@@ -200,7 +200,7 @@ ou: CertificateAuthorities
 dn: ou=Personal,ou=Certificates,dc=computer,dc=academy,dc=com
 objectClass: top
 objectClass: organizationalUnit
-ou: Users
+ou: Personal
 
 dn: ou=Machines,ou=Certificates,dc=computer,dc=academy,dc=com
 objectClass: top
