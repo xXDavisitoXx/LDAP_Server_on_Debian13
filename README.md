@@ -13,7 +13,14 @@
 * ⚙️ [Install basic software](#gear-install-basic-software)
 
 ## :recycle: Features
+ORDER:
 
+* 1. Create the directory tree structure
+* 2. Load the sudo schema
+* 3. Create the users
+* 4. Create the groups
+* 5. Create the sudo roles
+* 6. Apply the LAM ACL
 
 ## 1 install software
 ```bash
