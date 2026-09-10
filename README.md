@@ -374,9 +374,12 @@ ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Groups.ldif
 
 dn: olcDatabase={1}mdb,cn=config
 changetype: modify
+delete: olcAccess
+olcAccess: {2}to * by * read
+-
 add: olcAccess
-olcAccess: to dn.subtree="dc=computer,dc=academy,dc=com"
-  by group.exact="cn=LAM-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com" write
+olcAccess: {2}to dn.subtree="dc=correodip,dc=exteriores,dc=gob,dc=es"
+  by group.exact="cn=Administrators-LAM,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com" write
   by self write
   by users read
   by * none
