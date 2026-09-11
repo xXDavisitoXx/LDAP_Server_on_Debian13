@@ -250,7 +250,7 @@ objectClass: organizationalUnit
 ou: Rooms
 ```
 
-### 3.1 Import structure to lDAP 
+### 3.2 Import structure to lDAP 
 ```bash
 sudo ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f base.ldif
 ```
@@ -261,10 +261,10 @@ Check the base group is imported
 sudo ldapsearch -x -b "dc=computer,dc=academy,dc=com" ou
 ```
 
-### 3.2 Import sudoers or other schemas to LDAP
+### 4 Import sudoers or other schemas to LDAP
 El esquema sudo debe existir antes de importar cualquier LDIF que contenga objetos sudoRole, pero no depende de que hayas importado previamente base.ldif.
 
-### 3.2.1 Download the Debian packet
+### 4.1 Download the Debian packet
 
 ```bash
 mkdir sudo-schema
@@ -272,12 +272,12 @@ cd sudo-schema
 apt download sudo-ldap
 ```
 
-### 3.2.2 Extract the Debian packet
+### 4.2 Extract the Debian packet
 ```bash
 dpkg-deb -x sudo-ldap_*.deb extract
 ```
 
-### 3.2.3 Import sudoers schema
+### 4.3 Import sudoers schema
 ```bash
 ldapadd -Y EXTERNAL -H ldapi:/// -f extract/usr/share/doc/sudo-ldap/schema.olcSudo
 ```
@@ -287,110 +287,7 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f extract/usr/share/doc/sudo-ldap/schema.olcSu
 find extract -name "schema.olcSudo"
 ```
 
-### 3.3 Create Roles
-
-```conf
-# Roles.ldif
-
-dn: cn=Role-Linux-Admin,ou=Sudoers,ou=Roles,dc=computer,dc=academy,dc=com
-objectClass: top
-objectClass: sudoRole
-cn: Role-Linux-Admin
-sudoUser: %Linux-Administrators
-sudoHost: ALL
-sudoCommand: ALL
-
-dn: cn=Role-LDAP-Admin,ou=LDAP,ou=Roles,dc=computer,dc=academy,dc=com
-objectClass: top
-objectClass: sudoRole
-cn: Role-LDAP-Admin
-sudoUser: cn=LDAP-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
-sudoHost: ALL
-sudoCommand: /usr/bin/ldap*
-sudoCommand: /usr/sbin/slap*
-sudoCommand: /bin/systemctl *slapd*
-sudoCommand: /usr/bin/journalctl *slapd*
-sudoCommand: /usr/bin/sudoedit /etc/ldap/*
-sudoCommand: /usr/bin/sudoedit /etc/default/slapd/*
-sudoCommand: /usr/bin/sudoedit /etc/systemd/system/slapd*
-```
-
-### 3.4 Import Roles
-
-```bash
-ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Roles.ldif
-```
-
-
-### 3.5 Create Groups
-
-```conf
-# Groups.ldif
-
-dn: cn=LDAP-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
-objectClass: top
-objectClass: groupOfNames
-cn: LDAP-Administrators
-member: uid=user1,ou=Active,ou=Users,dc=computer,dc=academy,dc=com
-description: Group for user accounts that administer LDAP
-
-dn: cn=LAM-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
-objectClass: top
-objectClass: groupOfNames
-cn: LAM-Administrators
-member: uid=lam-service,ou=Services,ou=Users,dc=computer,dc=academy,dc=com
-member: uid=user1,ou=Active,ou=Users,dc=computer,dc=academy,dc=com
-description: Group for the LAM service account with administrative permissions over LDAP
-
-dn: cn=Linux-Administrators,ou=System,ou=Groups,dc=computer,dc=academy,dc=com
-objectClass: top
-objectClass: posixGroup
-cn: Linux-Administrators
-gidNumber: 2001
-description: Group for user accounts that administer Linux systems
-
-dn: cn=SSH-Access,ou=System,ou=Groups,dc=computer,dc=academy,dc=com
-objectClass: top
-objectClass: posixGroup
-cn: SSH-Access
-gidNumber: 2002
-description: POSIX group used to restrict remote SSH access to authorized users
-
-dn: cn=Wiki-Users,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
-objectClass: top
-objectClass: posixGroup
-cn: Wiki-Users
-gidNumber: 2003
-description: Group for user accounts that can access the Wiki
-```
-### 3.6 Import Groups
-
-```bash
-ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Groups.ldif
-```
-### 3.7 Create ACL to LAM-ADMIN group
-```conf
-# ACL.ldif
-
-dn: olcDatabase={1}mdb,cn=config
-changetype: modify
-delete: olcAccess
-olcAccess: {2}to * by * read
--
-add: olcAccess
-olcAccess: {2}to dn.subtree="dc=correodip,dc=exteriores,dc=gob,dc=es"
-  by group.exact="cn=Administrators-LAM,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com" write
-  by self write
-  by users read
-  by * none
-```
-
-### 3.8 Import ACL 
-```bash
-sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f ACL.ldif
-```
-
-### 3.9 Create Users
+### 5.1 Create Users
 ```conf
 # Users.ldif
 
@@ -456,31 +353,135 @@ gidNumber: 1003
 homeDirectory: /nonexistent
 loginShell: /sbin/nologin
 userPassword: {SSHA}R7xTc2PnLmQ4VbY9KwEjF5ZdNsAuHcG3
-
-
 ```
-### 3.10 Import Users 
+
+### 5.2 Import Users 
 
 ```bash
 ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Users.ldif
 ```
 
-## 4 install LAM 
+### 6.1 Create Groups
 
-### 4.1 Download Packet
+```conf
+# Groups.ldif
+
+dn: cn=LDAP-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: groupOfNames
+cn: LDAP-Administrators
+member: uid=user1,ou=Active,ou=Users,dc=computer,dc=academy,dc=com
+description: Group for user accounts that administer LDAP
+
+dn: cn=LAM-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: groupOfNames
+cn: LAM-Administrators
+member: uid=lam-service,ou=Services,ou=Users,dc=computer,dc=academy,dc=com
+member: uid=user1,ou=Active,ou=Users,dc=computer,dc=academy,dc=com
+description: Group for the LAM service account with administrative permissions over LDAP
+
+dn: cn=Linux-Administrators,ou=System,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: posixGroup
+cn: Linux-Administrators
+gidNumber: 2001
+description: Group for user accounts that administer Linux systems
+
+dn: cn=SSH-Access,ou=System,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: posixGroup
+cn: SSH-Access
+gidNumber: 2002
+description: POSIX group used to restrict remote SSH access to authorized users
+
+dn: cn=Wiki-Users,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: posixGroup
+cn: Wiki-Users
+gidNumber: 2003
+description: Group for user accounts that can access the Wiki
+```
+### 6.2 Import Groups
+
+```bash
+ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Groups.ldif
+```
+
+### 7.1 Create Roles
+
+```conf
+# Roles.ldif
+
+dn: cn=Role-Linux-Admin,ou=Sudoers,ou=Roles,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: sudoRole
+cn: Role-Linux-Admin
+sudoUser: %Linux-Administrators
+sudoHost: ALL
+sudoCommand: ALL
+
+dn: cn=Role-LDAP-Admin,ou=LDAP,ou=Roles,dc=computer,dc=academy,dc=com
+objectClass: top
+objectClass: sudoRole
+cn: Role-LDAP-Admin
+sudoUser: cn=LDAP-Administrators,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com
+sudoHost: ALL
+sudoCommand: /usr/bin/ldap*
+sudoCommand: /usr/sbin/slap*
+sudoCommand: /bin/systemctl *slapd*
+sudoCommand: /usr/bin/journalctl *slapd*
+sudoCommand: /usr/bin/sudoedit /etc/ldap/*
+sudoCommand: /usr/bin/sudoedit /etc/default/slapd/*
+sudoCommand: /usr/bin/sudoedit /etc/systemd/system/slapd*
+```
+
+### 7.2 Import Roles
+
+```bash
+ldapadd -x -D "cn=admin,dc=computer,dc=academy,dc=com" -W -f Roles.ldif
+```
+
+
+
+### 8.1 Create ACL to LAM-ADMIN group
+```conf
+# ACL.ldif
+
+dn: olcDatabase={1}mdb,cn=config
+changetype: modify
+delete: olcAccess
+olcAccess: {2}to * by * read
+-
+add: olcAccess
+olcAccess: {2}to dn.subtree="dc=correodip,dc=exteriores,dc=gob,dc=es"
+  by group.exact="cn=Administrators-LAM,ou=Applications,ou=Groups,dc=computer,dc=academy,dc=com" write
+  by self write
+  by users read
+  by * none
+```
+
+### 8.2 Import ACL 
+```bash
+sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f ACL.ldif
+```
+
+## 9 Install and configure LAM 
+
+### 9.1 Download and install Packet
 
 ```bash
 sudo apt install ldap-account-manager
 ```
 
-### 4.2 Update PHP memory limit to 256M
+### 9.2 Update PHP memory limit to 256M
 ```bash
  nano /etc/php/8.4/apache2/php.ini
 ```
 ```bash
 memory_limit = 256M
 ```
-### 4.3 Securize IP range to connect 
+### 9.3 Secure IP range to connect 
 
 ```bash
  nano /etc/apache2/conf-enabled/ldap-account-manager.conf
@@ -490,22 +491,22 @@ memory_limit = 256M
 #Require all granted
 Require ip 127.0.0.1 192.168.10.0/24
 ```
-### 4.4 Restart service Apache2
+### 9.3 Restart service Apache2
 
 ```conf
 sudo systemctl restart apache2
 ```
 
-### 4.5 Try web acces
+### 9.4 Try web acces
 http://LDAP-IP/lam
 
-### 4.6 Click the menu "LAM configuration" on the top right.
+### 9.5 Click the menu "LAM configuration" on the top right.
 
-### 4.7 Click "Edit server profiles" to modify the OpenLDAP profile.
+### 9.6 Click "Edit server profiles" to modify the OpenLDAP profile.
 * User: lam
 * pass: lam
 
-### 4.8 Change default password LAM 
+### 9.7 Change default password LAM 
 On the first tab, "General Settings," scroll all the way down to the section
 labeled "Profile Password" and enter the new password twice.
 
@@ -523,7 +524,7 @@ On the Profile password, input the new password and repeat.
 
 ⚠️ We recommnded change login method in server preferences to LDAP search
 
-### 4.9 Edit users and groups directory
+### 9.8 Edit users and groups directory
 
 Next, click on the Account Types section the configure the following section:
 
